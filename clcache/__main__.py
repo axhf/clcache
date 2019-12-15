@@ -880,6 +880,10 @@ class CalledForPreprocessingError(AnalysisError):
     pass
 
 
+class CalledWithUnsupportedOptionsError(AnalysisError):
+    pass
+
+
 class InvalidArgumentError(AnalysisError):
     pass
 
@@ -1312,6 +1316,9 @@ class CommandLineAnalyzer:
 
         if 'link' in options or 'c' not in options:
             raise CalledForLinkError()
+
+        if 'clr' in options:
+            raise CalledWithUnsupportedOptionsError('clr')
 
         if len(inputFiles) > 1 and compl:
             raise MultipleSourceFilesComplexError()
